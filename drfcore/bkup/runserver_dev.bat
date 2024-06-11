@@ -1,0 +1,1 @@
+python ./manage.py runserver --settings=drfcore.settings.development 8077

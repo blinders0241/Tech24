@@ -1,0 +1,74 @@
+[
+  {
+    "name": "Madrid",
+    "timeZone": "Europe/Madrid",
+    "timediff": "+02:00",
+    "isActive": false,
+    "cityCode": "MADRID",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Madrid_-_Sky_Bar_360%C2%BA_%28Hotel_Riu_Plaza_Espa%C3%B1a%29%2C_vistas_19.jpg/1920px-Madrid_-_Sky_Bar_360%C2%BA_%28Hotel_Riu_Plaza_Espa%C3%B1a%29%2C_vistas_19.jpg"
+  },
+  {
+    "name": "Nice",
+    "timeZone": "Europe/Paris",
+    "timediff": "+02:00 ",
+    "isActive": false,
+    "cityCode": "NCE",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Nizza-C%C3%B4te_d%27Azur.jpg/1920px-Nizza-C%C3%B4te_d%27Azur.jpg"
+  },
+  {
+    "name": "Bangalore",
+    "timeZone": "Asia/Kolkata",
+    "timediff": "+05:30",
+    "isActive": false,
+    "cityCode": "BLR",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/21/UB_CITY_Skyline.jpg"
+  },
+  {
+    "name": "Erding",
+    "timeZone": "Europe/Berlin",
+    "timediff": "+02:00",
+    "isActive": false,
+    "cityCode": "ERDING",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Landshuter_Str._1_Rathaus_Erding-3.jpg/1280px-Landshuter_Str._1_Rathaus_Erding-3.jpg"
+  },
+  {
+    "name": "Sydney",
+    "timeZone": "Australia/Sydney",
+    "timediff": "+10:00",
+    "isActive": false,
+    "cityCode": "SYD",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Sydney_Opera_House_and_Harbour_Bridge_Dusk_%282%29_2019-06-21.jpg/640px-Sydney_Opera_House_and_Harbour_Bridge_Dusk_%282%29_2019-06-21.jpg"
+  },
+  {
+    "name": "Dallas",
+    "timeZone": "America/New_York",
+    "timediff": "-05:00",
+    "isActive": false,
+    "cityCode": "Dallas",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/View_of_Dallas_from_Reunion_Tower_August_2015_13.jpg/1280px-View_of_Dallas_from_Reunion_Tower_August_2015_13.jpg"
+  },
+  {
+    "name": "London",
+    "timeZone": "Europe/London",
+    "timediff": "+01:00",
+    "isActive": false,
+    "cityCode": "London",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/6/67/London_Skyline_%28125508655%29.jpeg"
+  },
+  {
+    "name": "Istanbul",
+    "timeZone": "Europe/Istanbul",
+    "timediff": "+03:00",
+    "isActive": false,
+    "cityCode": "ISTANBUL",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/21/Aya_Sophia_%287144824757%29_%28cropped%29.jpg"
+  },
+  {
+    "name": "Ontario",
+    "timeZone": "America/Toronto",
+    "timediff": "-04:00",
+    "isActive": false,
+    "cityCode": "Ontario",
+    "imageUrl": "https://www.thoughtco.com/thmb/wuEcSPFCojJ-8zIUswQVb02XX6M=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-685015187-597dd84a519de2001182016b.jpg"
+  }
+]
