@@ -1,7 +1,8 @@
 
 import os,time,datetime
 
-
+BASE = os.path.dirname(os.path.abspath(__file__))
+print("BasePath from Glonster.py",BASE)
 class Globster():
     def __init__(self):
         pass 

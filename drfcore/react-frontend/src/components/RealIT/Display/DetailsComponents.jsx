@@ -6,7 +6,7 @@ import {
   columnDefsFrequencyDaily,
   columnDefsFrequencyWeekly,
   columnDefsFrequencyMonthly,
-} from "../../ColumnViews/columnDefs/";
+} from "../../ColumnViews/ColumnDefs";
 
 import moment from "moment";
 import MyGridComponent from "./MyGridComponent";

@@ -5,11 +5,13 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import axios from "axios";
-import {
-  columndef_daily_allstocks,
-  columnDefsForWeek,
-  columnDefsForMonth,
-} from "../../../ColumnViews/columnDefs/";
+// import {
+//   columndef_daily_allstocks,
+//   columnDefsForWeek,
+//   columnDefsForMonth,
+// } from "../../../ColumnViews/columnDefs/";
+
+import { columndef_daily_allstocks } from "../../../ColumnViews/ColumnDefs/";
 import { Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 

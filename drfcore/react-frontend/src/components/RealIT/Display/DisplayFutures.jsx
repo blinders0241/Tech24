@@ -8,11 +8,7 @@ import { FcHeatMap } from "react-icons/fc";
 
 import axios from "axios";
 
-import {
-  columndef_daily_allstocks,
-  columnDefsForWeek,
-  columnDefsForMonth,
-} from "../../ColumnViews/columnDefs/";
+import { columndef_daily_allstocks,columnDefsForWeek, columnDefsForMonth} from "../../ColumnViews/ColumnDefs";
 import { Alert, ButtonGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Typography } from "@mui/material";
