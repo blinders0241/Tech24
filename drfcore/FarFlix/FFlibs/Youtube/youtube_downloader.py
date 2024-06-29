@@ -5,11 +5,11 @@ sys.path.append(r"C:\SIMPLY_Official\\2024\\TechHome24\drfcore\\FarFlix")
 
 from FFlibs.Youtube.Globster import *
 
-BASePath = Globster().returnBasePath()
+BASePath = Globster().returnBasePath() +  r"\media_downloaded"
 
-output_video = BASePath + r'\\video\\'
-output_audio = BASePath + r'\\audio\\'
-DownloadPath = BASePath
+output_video = BASePath + r'\video'
+output_audio = BASePath + r'\audio'
+DownloadPath = BASePath + r'\YoutubeDirectDownloads\\'
 
 def on_progress(stream, chunk, bytes_remaining):
     """Callback function"""
@@ -29,6 +29,12 @@ def get_Stream(url):
 
 def get_best_quality(url, category="video"):
     yt, file_name = get_Stream(url)
+
+    file_name = file_name.replace("(","")
+    file_name = file_name.replace(".","_")
+    file_name = file_name.replace("\"","")
+    # print("#################")
+    # print(file_name)
     streams = set()
     for stream in yt.streams.filter(type=category):  # Only look for video streams to avoid None values
         streams.add(stream.resolution)
@@ -50,6 +56,10 @@ def get_best_quality(url, category="video"):
 def download_video(url):
     best = get_best_quality(url)
     yt, file_name = get_Stream(url)
+    
+    file_name = file_name.replace("(","")
+    file_name = file_name.replace(".","_")
+    file_name = file_name.replace("\"","")
     tmp_video = yt.streams.filter(res=get_best_quality(url) + 'p', progressive=False).first().download(
         output_path=output_video, filename=file_name + '.mp4')
     video = ffmpeg.input(tmp_video)
@@ -58,6 +68,10 @@ def download_video(url):
 
 def download_audio(url):
     yt, file_name = get_Stream(url)
+    file_name = file_name.replace("(","")
+    file_name = file_name.replace(".","_")
+    file_name = file_name.replace("\"","")
+    
     if yt.streams.get_by_itag(251):
         print("Downloading Best Audio Available")
         yt.streams.get_by_itag(251).download(output_path=output_audio, filename=file_name + '.mp3')
@@ -73,14 +87,18 @@ def download_audio(url):
 
 
 def merge_Audio_Video(url):
-    yt, filename = get_Stream(url)
+    yt, file_name = get_Stream(url)
+    file_name = file_name.replace("(","")
+    file_name = file_name.replace(".","_")
+    file_name = file_name.replace("\"","")
     video = download_video(url)
     audio = download_audio(url)
-    print(type(video))
-    print(type(audio))
+    print("########")
+    print(DownloadPath)
     # ffmpeg.concat(video, audio, v=1, a=1).output('finished_video.mp4').run(overwrite_output=True)
-    ffmpeg.output(audio, video, DownloadPath + filename + ".mp4").run(overwrite_output=True)
-    # ffmpeg.output(audio, video, DownloadPath + filename + ".mp4").run(overwrite_output=True)
+    ffmpeg.output(audio, video, DownloadPath + file_name + ".mp4").run(overwrite_output=True)
+        # Delete intermediate files
+    # os.remove(video)
 
 
 def download_videos(urls, resolution):
