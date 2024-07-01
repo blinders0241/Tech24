@@ -34,19 +34,7 @@ const FarFlixMovieDetailsPage = (props) => {
       });
   }, [trigger]);
 
-  // function convertRuntime(runtimeInMinutes) {
-  //   if (isNaN(runtime)) {
-  //     console.log(`Error: Unable to convert "${runtimeStr}" to a number.`);
-  //     return null;
-  //   }
-  //   let runtimeStr = runtimeInMinutes.replace(/'/g, '"'); // Replace single quotes with double quotes
-  //   let runtimeArr = JSON.parse(runtimeStr); // Parse the string as an array
-  //   let runtime = parseInt(runtimeArr[0], 10); // Convert the first element to a number
 
-  //   let hours = Math.floor(runtime / 60);
-  //   let minutes = runtime % 60;
-  //   return `${hours}h ${minutes}m`;
-  // }
   function convertRuntime(runtimeInMinutes) {
     let runtimeArr;
 
@@ -93,74 +81,76 @@ const FarFlixMovieDetailsPage = (props) => {
     navigator.clipboard.writeText(params);
     alert("FillePathCopied , Use Start + RUN / Launch vlc & paste: " + params);
   };
+
+
   return (
     <>
       <Container style={{ backgroundColor: "#D7DBDD", height: "300px" }}>
-        <Row>
-          <Col xs={6}>
-            <Card style={{ width: "40rem" }}>
-              <Card.Body>
-                <Card.Title>
-                  {Title_IMDB} &nbsp; {Year_IMDB}
-                </Card.Title>
-                <Card.Subtitle
-                  className="mb-2 text-muted"
-                  style={{
-                    overflowWrap: "break-word",
-                    whiteSpace: "normal",
-                    userSelect: "text",
-                  }}
-                >
-                  <b>RunTIme:</b> &nbsp;
-                  {runtimeStr}&nbsp;&nbsp;
-                  <b>Director:</b> &nbsp;
-                  {Directors_IMDB}&nbsp;&nbsp;
-                  <b>Plot:</b> &nbsp;
-                  {Plot_IMDB}
-                </Card.Subtitle>
-                <Card.Text></Card.Text>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col>
-            <Accordion>
-              <Accordion.Item eventKey="0">
-                <Accordion.Header>Update Movie Details</Accordion.Header>
-                <Accordion.Body>
-                  <FFEditDBDetails id={ID} filePath={FilePath} />
-                </Accordion.Body>
-              </Accordion.Item>
-            </Accordion>
-            <Placeholder.Button xs={12} aria-hidden="true">
-              Admin Details
-            </Placeholder.Button>
-            <div>
-              {rowData[0] && (
-                <Container>
-                  <Row>
-                    <Button variant="secondary" size="sm">
-                      diskInAction : <b>{rowData[0].Classified}</b> &nbsp;
-                      sizeFile : <b>{rowData[0].FileSize}</b>
-                    </Button>
+      <Row>
+  <Col xs={6}>
+    <Card style={{ width: "40rem" }}>
+      <Card.Body>
+        <Card.Title>
+          {Title_IMDB}   {Year_IMDB}
+        </Card.Title>
+        <Card.Subtitle
+          className="mb-2 text-muted"
+          style={{
+            overflowWrap: "break-word",
+            whiteSpace: "normal",
+            userSelect: "text",
+          }}
+        >
+          <b>RunTIme:</b>  
+          {runtimeStr}  
+          <b>Director:</b>  
+          {Directors_IMDB}  
+          <b>Plot:</b>  
+          {Plot_IMDB}
+        </Card.Subtitle>
+        <Card.Text></Card.Text>
+      </Card.Body>
+    </Card>
+  </Col>
+  <Col>
+    <Accordion>
+      <Accordion.Item eventKey="0">
+        <Accordion.Header>Update Movie Details</Accordion.Header>
+        <Accordion.Body>
+          <FFEditDBDetails id={ID} filePath={FilePath} />
+        </Accordion.Body>
+      </Accordion.Item>
+    </Accordion>
+    <Placeholder.Button xs={12} aria-hidden="true">
+      Admin Details
+    </Placeholder.Button>
+    <div>
+      {rowData[0] && (
+        <Container>
+          <Row>
+            <Button variant="secondary" size="sm">
+              diskInAction : <b>{rowData[0].Classified}</b>  
+              sizeFile : <b>{rowData[0].FileSize}</b>
+            </Button>
+            <Button variant="secondary" size="sm">
+              sizeFile : {rowData[0].FilePath}
+            </Button>
+          </Row>
+          <Row>
+            <Button
+              onClick={() => {
+                handlethiButtonClick(rowData[0].FilePath);
+              }}
+            >
+              Play Movie
+            </Button>
+          </Row>
+        </Container>
+      )}
+    </div>
+  </Col>
+</Row>
 
-                    <Button variant="secondary" size="sm">
-                      sizeFile : {rowData[0].FilePath}
-                    </Button>
-                  </Row>
-                  <Row>
-                    <Button
-                      onClick={() => {
-                        handlethiButtonClick(rowData[0].FilePath);
-                      }}
-                    >
-                      Play Movie
-                    </Button>
-                  </Row>
-                </Container>
-              )}
-            </div>
-          </Col>
-        </Row>
       </Container>
     </>
   );

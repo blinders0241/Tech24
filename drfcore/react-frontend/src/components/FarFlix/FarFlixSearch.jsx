@@ -8,7 +8,6 @@ import { columndef_allmovies } from "../ColumnViews/FarFlixSearchColDef/";
 import FarFlixTable from "./FarFlixTable";
 
 function FarFlixSearch() {
-  // const [clearFilter, setClearFilter] = useState(false);
   const [fetcher, setFetcher] = useState(false);
   const [frequency, setFrequency] = useState("D");
   const [rowData, setRowData] = useState([]);
@@ -26,16 +25,15 @@ function FarFlixSearch() {
     Object.keys(params).forEach((key) =>
       url.searchParams.append(key, params[key])
     );
-    // let url = new URL();
+
     fetch(url)
       .then((result) => result.json())
       .then((rowData) => {
         setRowData(rowData);
-        // console.log("Do GE", rowData);
       });
   }, [trigger]);
 
-  const handleButtonClickFetchDaily = (e) => {
+  const handleButtonSortYear = (e) => {
     setFetcher(true);
     setFrequency(e.target.value);
     setTrigger(trigger + 1);
@@ -59,7 +57,7 @@ function FarFlixSearch() {
               variant="outline-primary"
               id="Daily"
               value="D"
-              onClick={handleButtonClickFetchDaily}
+              onClick={handleButtonSortYear}
             >
               Daily
             </Button>
@@ -79,8 +77,6 @@ function FarFlixSearch() {
             >
               Monthly
             </Button>
-            {/* <Button variant="outline-warning" onClick={clearAllFilters}> */}
-            {/* </Button>{" "} */}
             <Button variant="outline-danger">Danger</Button>{" "}
             <Button variant="outline-light">Light</Button>{" "}
             <Button variant="outline-dark">Dark</Button>

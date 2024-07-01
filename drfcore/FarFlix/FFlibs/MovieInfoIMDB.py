@@ -242,5 +242,6 @@ class MovieInfoIMDB:
     #     print("Success")
         
 # MovieInfoIMDB().get_movie_details([5956100,4434004,2178470])
-MovieInfoIMDB().build_uploadMovieDetailsIMDB()
+#we were runningthis
+# MovieInfoIMDB().build_uploadMovieDetailsIMDB()
 # MovieInfoIMDB().buildCSVIMDBdetailsFile()

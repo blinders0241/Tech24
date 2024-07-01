@@ -9,7 +9,7 @@ class ExpiryDate():
     def get_expiry_date_weekly(self):
         today = datetime.date.today()
         # Find next Thursday
-        next_thursday = today + datetime.timedelta((3-today.weekday() + 7) % 7)
+        next_thursday = today + datetime.timedelta((2-today.weekday() + 7) % 7)
         # If next Thursday is a holiday, return Wednesday instead
         if next_thursday in ind_holidays:
             return (next_thursday - datetime.timedelta(days=1)).strftime("%d-%b-%Y").upper()
@@ -25,7 +25,7 @@ class ExpiryDate():
             else:
                 last_day = today.replace(month=today.month+1, day=1) - datetime.timedelta(days=1)
             # Find the last Thursday of the month
-            while last_day.weekday() != 3:  # 0 is Monday, 1 is Tuesday, ..., 3 is Thursday
+            while last_day.weekday() != 2:  # 0 is Monday, 1 is Tuesday, ..., 3 is Thursday
                 last_day -= datetime.timedelta(days=1)
             if last_day in ind_holidays:
                 return (last_day - datetime.timedelta(days=1)).strftime("%d-%b-%Y").upper()
