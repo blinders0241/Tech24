@@ -14,5 +14,6 @@ urlpatterns = [
     path('FF_FetchDetailsFromDB/', views.FF_FetchDetailsFromDB),
     path('FF_FetchEditDetailsTODB/', views.FF_FetchEditDetailsTODB),
     path('FF_DeleteMoviebyID/', views.FF_DeleteMoviebyID),
+    path('FF_Youtube/', views.FF_Youtube),
     
 ]

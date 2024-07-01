@@ -1,8 +1,6 @@
 
 import os,time,datetime
 
-BASE = os.path.dirname(os.path.abspath(__file__))
-print("BasePath from Glonster.py",BASE)
 class Globster():
     def __init__(self):
         pass 
@@ -13,3 +11,8 @@ class Globster():
     SQL_URL = r'C:\SIMPLY_Official\2024\TechHome24\drfcore'
     SavePath = r"C:\SIMPLY_Official\2024\TechHome24\drfcore\FarFlix\data\\"
     SaveMovieDetailsIMDB = r"C:\SIMPLY_Official\2024\TechHome24\drfcore\FarFlix\data\MovieDetailsFromIMDB\\"
+    
+    def returnBasePath(self):
+        return os.path.dirname(os.path.abspath(__file__))
+
+# print(Globster().returnBasePath())

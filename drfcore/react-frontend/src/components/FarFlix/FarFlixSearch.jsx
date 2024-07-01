@@ -6,9 +6,10 @@ import Col from "react-bootstrap/Col";
 import axios from "axios";
 import { columndef_allmovies } from "../ColumnViews/FarFlixSearchColDef/";
 import FarFlixTable from "./FarFlixTable";
+import { Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 
 function FarFlixSearch() {
-  // const [clearFilter, setClearFilter] = useState(false);
   const [fetcher, setFetcher] = useState(false);
   const [frequency, setFrequency] = useState("D");
   const [rowData, setRowData] = useState([]);
@@ -26,16 +27,15 @@ function FarFlixSearch() {
     Object.keys(params).forEach((key) =>
       url.searchParams.append(key, params[key])
     );
-    // let url = new URL();
+
     fetch(url)
       .then((result) => result.json())
       .then((rowData) => {
         setRowData(rowData);
-        // console.log("Do GE", rowData);
       });
   }, [trigger]);
 
-  const handleButtonClickFetchDaily = (e) => {
+  const handleButtonSortYear = (e) => {
     setFetcher(true);
     setFrequency(e.target.value);
     setTrigger(trigger + 1);
@@ -55,32 +55,23 @@ function FarFlixSearch() {
       <Container fluid>
         <Row>
           <Col>
-            <Button
-              variant="outline-primary"
-              id="Daily"
-              value="D"
-              onClick={handleButtonClickFetchDaily}
-            >
-              Daily
-            </Button>
-            <Button
-              variant="outline-secondary"
-              id="Weekly"
-              value="W"
-              onClick={handleButtonClickFetchWeekly}
-            >
-              Weekly
-            </Button>
-            <Button
-              variant="outline-success"
-              id="Monthly"
-              value="M"
-              onClick={handleButtonClickFetchMonthly}
-            >
-              Monthly
-            </Button>
-            {/* <Button variant="outline-warning" onClick={clearAllFilters}> */}
-            {/* </Button>{" "} */}
+
+            <Typography
+                variant="h6"
+                component={Link}
+                to="/youTube"
+                sx={{
+                  color: "white",
+                  textDecoration: "none",
+                  letterSpacing: "1px",
+                  marginLeft: "10px",
+                  marginRight: "10px",
+                  // fontStyle: "oblique",
+                  fontSize: "18px", // text size
+                }}
+              >
+                HeatMap
+              </Typography>
             <Button variant="outline-danger">Danger</Button>{" "}
             <Button variant="outline-light">Light</Button>{" "}
             <Button variant="outline-dark">Dark</Button>

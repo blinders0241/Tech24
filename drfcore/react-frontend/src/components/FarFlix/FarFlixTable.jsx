@@ -63,8 +63,8 @@ const FarFlixTable = ({ rowData, columnDefs }) => {
           className="ag-theme-alpine-auto-dark"
           // className="ag-theme-balham"
           style={{
-            height: "888px",
-            width: "1400px",
+            height: "800px",
+            width: "1420px",
           }}
         >
           <AgGridReact

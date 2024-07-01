@@ -3,11 +3,16 @@ export const columndef_allmovies = [
     headerName: "Movie Title",
     field: "Title_IMDB",
     filter: "agTextColumnFilter",
+    filterParams: {
+      buttons: ["apply", "reset"],
+      closeOnApply: true,
+    },
     floatingFilter: true,
     cellRenderer: "agGroupCellRenderer",
+    width: 280,
   },
   {
-    headerName: "Year of Release",
+    headerName: "Year",
     field: "Year_IMDB",
     filter: "agTextColumnFilter",
     width: 80,
@@ -18,6 +23,7 @@ export const columndef_allmovies = [
     field: "Language_IMDB",
     filter: "agTextColumnFilter",
     floatingFilter: true,
+    width: 130,
   },
 
   {
@@ -32,14 +38,15 @@ export const columndef_allmovies = [
     field: "Cast_IMDB",
     filter: "agTextColumnFilter",
     floatingFilter: true,
-    width: 310,
+    width: 380,
   },
 
   {
-    headerName: "IMDB Rating",
+    headerName: "Rating",
     field: "Rating_IMDB",
     filter: "agTextColumnFilter",
     floatingFilter: true,
+    width: 80,
   },
   {
     headerName: "Genres",
@@ -49,21 +56,4 @@ export const columndef_allmovies = [
     floatingFilter: true,
   },
 
-  // {
-  //   headerName: "File Size",
-  //   field: "FileSize",
-  // },
-
-  // {
-  //   headerName: "Play Video",
-  //   field: "FilePath",
-  //   width: 144,
-  //   cellRendererFramework: (params) => {
-  //     return (
-  //       <a href={params.value} target="_blank" rel="noopener noreferrer">
-  //         Play Video
-  //       </a>
-  //     );
-  //   },
-  // },
 ];

@@ -9,11 +9,12 @@ from FarFlix.FFlibs.DbConnections import DbConnections
 from FarFlix.FFlibs.MovieDetailsIMDB import *
 from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
+from FarFlix.FFlibs.Youtube import youtube_downloader
 # Create your views here.
 
 
 def FarFlixhome(request):
-    msg = "HELLO"
+    msg = "HELL"
     return JsonResponse({"result": msg})
 @csrf_exempt
 def FarFlixUpload(request):
@@ -158,25 +159,16 @@ def FF_FetchEditDetailsTODB(request):
                                 FROM FarFlix_farflixmoviesmodel \
                                 WHERE ID = '%s')" % ID)
                 movideDetailsID = cur.fetchone()
-                print(movideDetailsID)
                 id_FarFlix_ffmoviedetails = movideDetailsID[0]
                 print("ID to update in FarFlix_ffmoviedetailsmodel Table",id_FarFlix_ffmoviedetails )
                 print("Data received from the Page/Form",data)
-                
-                
                 #Fetch the details from IMDB Site 
                 dataframefromIMDB = MovieDetailsIMDB().get_movie_details(received_movieCode_IMDB)
-                # print("#####DataFrame with IMDB details ######")
-                # print(dataframefromIMDB)
-                # Details coming in movie.movieCode_IMDB , movie.Year_IMDB , movie.Title_IMDB
                 movie.movieCode_IMDB = data.get('movieCode_IMDB', movie.movieCode_IMDB)
                 movie.Year_IMDB = data.get('Year_IMDB', movie.Year_IMDB)
                 movie.Title_IMDB = data.get('Title_IMDB', movie.Title_IMDB)
                 movie.save()
-                # print("Printing from DATABASE after save", movie.id , movie.Year_IMDB,movie.movieCode_IMDB)
-                # Assuming df is your dataframe
                 row = dataframefromIMDB.iloc[0]  # Get the first row of the dataframe
-
                 # Prepare the SQL UPDATE statement
                 sql = """
                 UPDATE FarFlix_ffmoviedetailsmodel
@@ -219,4 +211,27 @@ def FF_DeleteMoviebyID(request):
     else:
         return JsonResponse({'error': 'Invalid request'}, status=400)
 
+@csrf_exempt
+def FF_Youtube(request):
+    YoutubeUrl = request.GET.get('videoId', '')
+    print("# == Params received ============================================")
+    print(f"params1: {YoutubeUrl}")
+    # links = youtube_downloader.input_links(YoutubeUrl)
+    YoutubeUrl = YoutubeUrl.split('\n')
+    print(type(YoutubeUrl))
+    links = YoutubeUrl.pop()
+    print(links)
 
+    try:
+        youtube_downloader.merge_Audio_Video(links)
+        print("Download finished!")
+
+    except Exception as e:
+        print("Error occurred while downloading the video", e)
+        return JsonResponse({"error": "Error occurred while downloading the video"}, status=500)
+
+    response = {"result": "Saved to DB"}
+    return JsonResponse(response)
+    # return JsonResponse({"result": YoutubeUrl}, safe=False)
+
+    

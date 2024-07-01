@@ -26,6 +26,9 @@ class StockMapper:
                 df.columns = df.columns.str.replace('\n', ' ')
                 # print(df.columns.to_list())
                 df.columns = df.columns.str.strip(' ')
+                df.columns = df.columns.str.replace("\r", "")
+                df.columns = df.columns.str.replace(" ", "")
+                # print(df.columns)
                 # print(df.head())
                 # Append the rows under 'SYMBOL' column to the list
                 symbols = df['SYMBOL'].tolist()

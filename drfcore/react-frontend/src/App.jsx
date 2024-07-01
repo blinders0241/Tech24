@@ -41,6 +41,7 @@ import Weather from "./components/Weather/Weather";
 import UploadIndexHistoricals from "./components/RealIT/Upload/UploadIndexHistoricals";
 import IndexMeter from "./components/RealIT/Display/IndexCorner/IndexMeter";
 import DisplayIndexFutures from "./components/RealIT/Display/IndexCorner/DisplayIndexFutures";
+import Youtube from "./components/FarFlix/Youtube/Youtube";
 
 const allNotesapi = "http://127.0.0.1:8000/api/home/";
 
@@ -270,6 +271,7 @@ function App() {
             <Route path="/FarFlixSearch" element={<FarFlixSearch />}></Route>
             <Route path="/sparrowHome" element={<SparrowLive />}></Route>
             <Route path="/heatMap" element={<HeatMap />}></Route>
+            <Route path="/youTube" element={<Youtube />}></Route>
             <Route path="/Weather" element={<Weather />}></Route>
             <Route path="/IndexMeter" element={<IndexMeter />}></Route>
           </Routes>
