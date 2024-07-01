@@ -32,6 +32,12 @@ class FetchDetailsByFrequency:
         return df
     
     def indexdetailsDaily(self):
+        """
+        Fetches the daily details of index futures from the database.
+
+        Returns:
+            pandas.DataFrame: A DataFrame containing the daily details of index futures.
+        """
         df = pd.read_sql_query("SELECT * FROM home_stockfuturesmodel", self.con)
         # Sort by TimeStamp
         df_sorted = df.sort_values(by='TIMESTAMP', ascending=False)
@@ -47,57 +53,45 @@ class FetchDetailsByFrequency:
         return df
     
     def detailsWeekly(self):
-        # print("Weekly Method Called ####")
-        weekly_df = pd.read_sql_query("SELECT \
-            SYMBOL, date(TIMESTAMP, 'weekday 0', '-6 days') as Week,  \
-            min(case when rn = 1 then OPEN end) as OPEN,    \
-            max(HIGH) as HIGH,    \
-            min(LOW) as LOW,\
-            max(case when rn = 1 then CLOSE end) as CLOSE,  \
-            sum(VOLUME) as VOLUME, \
-            min(case when rn = 1 then OPEN_INT end) as OPEN_INT,    \
-            sum(CHG_IN_OI) as CHG_IN_OI  \
-            FROM \
-            (SELECT *, row_number() over(partition by SYMBOL, date(TIMESTAMP, 'weekday 0', '-6 days') \
-            order by TIMESTAMP desc) as rn    FROM home_stockfuturesmodel  ) \
-            GROUP BY SYMBOL, Week \
-            ORDER BY SYMBOL, Week ;", self.con)
-
-        # Assuming df is your DataFrame
-        weekly_df['Week'] = pd.to_datetime(weekly_df['Week'])
-
-        # Set the DataFrame index to be the timestamp
-        weekly_df.set_index('Week', inplace=True)
         
-        # # Calculate the WeeklyChange
-        weekly_df['WeeklyChange'] = weekly_df.groupby('SYMBOL')['CLOSE'].diff()
-        weekly_df['pChange'] = ((weekly_df['WeeklyChange'] / weekly_df['OPEN'])*100).round(2)
-        # wwekly_df[]
-        weekly_df['pVolume'] = (weekly_df['VOLUME'] / weekly_df['VOLUME'].max() * 100).round(2)
-        
-        # Reset the index
-        weekly_df.reset_index(inplace=True)
+        # Execute optimized SQL query and directly parse dates
+        weekly_df = pd.read_sql_query("""
+            SELECT 
+                SYMBOL, 
+                date(TIMESTAMP, 'weekday 0', '-6 days') as Week,
+                min(case when rn = 1 then OPEN end) as OPEN,
+                max(HIGH) as HIGH,
+                min(LOW) as LOW,
+                max(case when rn = 1 then CLOSE end) as CLOSE,
+                sum(VOLUME) as VOLUME,
+                min(case when rn = 1 then OPEN_INT end) as OPEN_INT,
+                sum(CHG_IN_OI) as CHG_IN_OI
+            FROM (
+                SELECT *, row_number() over(partition by SYMBOL, date(TIMESTAMP, 'weekday 0', '-6 days') order by TIMESTAMP desc) as rn    
+                FROM home_stockfuturesmodel
+            ) 
+            GROUP BY SYMBOL, Week
+            ORDER BY SYMBOL, Week;
+        """, self.con, parse_dates=['Week'])
 
-        # Add the WeekNumber
+        # Calculate additional columns
         weekly_df['WeekNumber'] = weekly_df['Week'].dt.isocalendar().week
-        List_W_M_Y_Wn_H_M =  Globster().getWeekDay()
-        week_num = List_W_M_Y_Wn_H_M[0]
-        # print(f"The current week number is {week_num}")
-        # print(List_W_M_Y_Wn_H_M[3])
-        if List_W_M_Y_Wn_H_M[3] not in (3,4,5,6):
-            week_num = week_num-1
-        print("####",week_num)
-        df_filtered = weekly_df[weekly_df['WeekNumber'] == week_num]
-        df_filtered['freq']="W"
-        
-        #Exlude Index Futures        
-        index_Futures_List = ['BANKNIFTY','FINNIFTY','MIDCPNIFTY','NIFTY','IDEA']
-        df = df_filtered[~df_filtered['SYMBOL'].isin(index_Futures_List) ]
-        # print(df.columns.to_list())
-        print(df.head())
-        
-        # Return the DataFrame Weekly
-        return df
+        weekly_df['WeeklyChange'] = weekly_df.groupby('SYMBOL')['CLOSE'].diff()
+        weekly_df['pChange'] = ((weekly_df['WeeklyChange'] / weekly_df['OPEN']) * 100).round(2)
+        weekly_df['pVolume'] = (weekly_df['VOLUME'] / weekly_df['VOLUME'].max() * 100).round(2)
+
+        # Filter based on current week number
+        current_week_number = Globster().getWeekDay()[0]
+        if Globster().getWeekDay()[3] not in (3, 4, 5, 6):
+            current_week_number -= 1
+        weekly_df = weekly_df[weekly_df['WeekNumber'] == current_week_number]
+
+        # Exclude Index Futures
+        index_futures_list = ['BANKNIFTY', 'FINNIFTY', 'MIDCPNIFTY', 'NIFTY', 'IDEA']
+        weekly_df = weekly_df[~weekly_df['SYMBOL'].isin(index_futures_list)]
+        weekly_df['freq'] = "W"
+
+        return weekly_df
     
     def indexdetailsWeekly(self):
         weekly_df = pd.read_sql_query("SELECT \

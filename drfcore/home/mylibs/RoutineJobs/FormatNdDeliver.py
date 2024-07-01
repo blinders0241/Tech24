@@ -3,7 +3,7 @@ import os,sys
 import time
 BASE_DIR = str(Path(__file__).resolve().parent.parent)
 # Define the path to the parent directory of drfcore
-path = Path('C:/SIMPLY_Official/2024/TechHome241/')
+path = Path('C:/SIMPLY_Official/2024/TechHome24/')
 # Add the path to sys.path
 sys.path.append(str(path.resolve()))
 # Now you should be able to import the module
@@ -18,10 +18,24 @@ output_path_cm = BASE_DIR +os.sep+ 'data' +os.sep+ 'ReadyBhavFile' +os.sep+ 'Equ
 output_path_fo = BASE_DIR +os.sep+ 'data' +os.sep+ 'ReadyBhavFile' +os.sep+ 'Derivatives'
 
 class FormatNdDeliver:
+    """
+    This class handles the formatting and delivery of files.
+
+    Methods:
+    - getExtractedFiles: Retrieves and processes extracted files.
+    """
+
     def __init__(self):
         pass
     
     def getExtractedFiles(self):
+        """
+        Retrieves and processes extracted files.
+
+        Returns:
+        - ReurnMsg: Message indicating the result of processing files.
+        - ReurnMsgEquity: Message indicating the result of processing equity files.
+        """
         print("################ Reached getExtractedFiles ################################")
         print(raw_file_path)
         extractedFiles = FileExtractor().extractZipFiles(raw_file_path)

@@ -4,11 +4,11 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 
-# Define the path to the parent directory of drfcore
-path = Path('C:/SIMPLY_Official/2024/TechHome241/')
+# # Define the path to the parent directory of drfcore
+# path = Path('C:/SIMPLY_Official/2024/TechHome24/')
 
-# Add the path to sys.path
-sys.path.append(str(path.resolve()))
+# # Add the path to sys.path
+# sys.path.append(str(path.resolve()))
 
 # Now you should be able to import the module
 from drfcore.home.mylibs.GlobsterHome import *
